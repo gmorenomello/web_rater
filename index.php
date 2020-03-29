@@ -2,9 +2,6 @@
 <html>
     <head>
         <title></title>
-        <script src='dir.php'>
-            // Imports an array of file names at usr folder
-        </script>
         <style>
             .slidecontainer {
               width: 50%;
@@ -41,8 +38,18 @@
               cursor: pointer;
             }
         </style>
+        <script type="text/javascript" >
+            var files = <?php $out = array();
+            foreach (glob('usr/*.jpg') as $filename) {
+                $p = pathinfo($filename);
+                $out[] = $p['filename'];
+            }
+            echo json_encode($out); ?>;
+        </script>
+        
     </head>
     <body>
+        
         <script>
             var n_of_imgs = files.length;
             let current_imag = 1;
@@ -169,5 +176,6 @@
                 warmth_output.innerHTML = this.value;
             }
         </script>
+        
     </body>
 </html>
